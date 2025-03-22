@@ -54,6 +54,7 @@ public class EditNoteServlet extends HttpServlet {
     // Process the form submission
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
+        request.setCharacterEncoding("UTF-8");
 
         try {
             String id = request.getParameter("id");

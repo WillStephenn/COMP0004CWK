@@ -29,6 +29,8 @@ public class SearchServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response)
           throws IOException, ServletException {
 
+    request.setCharacterEncoding("UTF-8");
+
     try {
       String searchTerm = request.getParameter("searchTerm");
 
