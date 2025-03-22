@@ -59,44 +59,61 @@ public class Model
     return new ArrayList<>(notesMap.values());
   }
 
-  public void addNote(Note note){
+  public void putNote(Note note){
+    // This creates a new note if a note with that id doesn't exist yet
     notesMap.put(note.getId(), note);
   }
 
-  // This also returns dummy data. The real version should use the keyword parameter to search
-  // the data and return a list of matching items.
-  public List<String> searchFor(String keyword)
-  {
-    return List.of("Search keyword is: "+ keyword, "result1", "result2", "result3");
+  public void deleteNote(Note note){
+    notesMap.remove(note.getId());
+  }
+
+  public List<Note> searchFor(String keyword) {
+    if (keyword == null || keyword.trim().isEmpty()) {
+      return new ArrayList<>();
+    }
+
+    List<Note> results = new ArrayList<>();
+
+    for (Note note : notesMap.values()) {
+      if (note.containsSearchTerm(keyword)) {
+        results.add(note);
+      }
+    }
+
+    return results;
+  }
+
+  public void createCategory(String categoryName) {
+    // Create a special note to represent a category
+    Note category = new Note(categoryName, "Category: " + categoryName, null, null);
+
+    putNote(category);
+    saveNotes();
+  }
+
+  public void addNoteToCategory(String noteId, String categoryId) {
+    Note note = getNoteById(noteId);
+    Note category = getNoteById(categoryId);
+
+    if (note != null && category != null) {
+      note.addCategory(categoryId);
+      // Update last modified date by setting header to itself
+      note.setHeader(note.getHeader());
+      putNote(note);
+      saveNotes();
+    }
+  }
+
+  public List<Note> getNotesInCategory(String categoryId) {
+    List<Note> categoryNotes = new ArrayList<>();
+
+    for (Note note : notesMap.values()) {
+      if (note.getCategories() != null && note.getCategories().contains(categoryId)) {
+        categoryNotes.add(note);
+      }
+    }
+
+    return categoryNotes;
   }
 }
-
-
-/*Data Access Methods required
-
-open() or loadNotes() - Load notes from JSON file
-saveNotes() - Save notes to JSON file
-getNotes() - Return the collection of notes
-getNoteById(String id) - Find specific note
-
-
-Modification Methods
-
-addNote(Note note) - Add a new note
-updateNote(Note note) - Update existing note
-deleteNote(String id) - Delete a note
-createCategory(String category) - Create note category (Requirement 6)
-addNoteToCategory(String noteId, String categoryId) - Add note to category
-
-
-Search Methods
-
-searchNotes(String query) - Search through notes
-getNotesInCategory(String category) - Get notes in a category
-
-
-Utility Methods
-
-generateId() - Generate unique IDs for notes
-validateNote(Note note) - Validate note data
-backupNotes() - Create backups (optional)*/
