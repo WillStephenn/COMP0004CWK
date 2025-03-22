@@ -1,0 +1,19 @@
+.clearBoth {
+  clear: both;
+}
+.category-tag {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 2px 8px;
+  margin-right: 5px;
+  border-radius: 3px;
+  font-size: 0.8em;
+  text-decoration: none;
+  color: #333;
+}
+.category-tag:hover {
+  background: #e0e0e0;
+}
+.note-categories {
+  margin-top: 8px;
+}
