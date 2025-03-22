@@ -62,10 +62,12 @@ public class Model
   public void putNote(Note note){
     // This creates a new note if a note with that id doesn't exist yet
     notesMap.put(note.getId(), note);
+    saveNotes();
   }
 
   public void deleteNote(Note note){
     notesMap.remove(note.getId());
+    saveNotes();
   }
 
   public List<Note> searchFor(String keyword) {
@@ -84,24 +86,11 @@ public class Model
     return results;
   }
 
-  public void createCategory(String categoryName) {
-    // Create a special note to represent a category
-    Note category = new Note(categoryName, "Category: " + categoryName, null, null);
-
-    putNote(category);
-    saveNotes();
-  }
-
-  public void addNoteToCategory(String noteId, String categoryId) {
+  public void addNoteToCategory(String noteId, String categoryName) {
     Note note = getNoteById(noteId);
-    Note category = getNoteById(categoryId);
-
-    if (note != null && category != null) {
-      note.addCategory(categoryId);
-      // Update last modified date by setting header to itself
-      note.setHeader(note.getHeader());
+    if (note != null) {
+      note.addCategory(categoryName);
       putNote(note);
-      saveNotes();
     }
   }
 

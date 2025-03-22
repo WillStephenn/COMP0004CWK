@@ -14,7 +14,6 @@ public class Note {
     private String imagePath = null;
     private ArrayList<String> categories = new ArrayList<>();
 
-
     public Note(String header, String textContent, String url, String imagePath) {
         this.id = UUID.randomUUID().toString();
         this.header = header;
@@ -23,6 +22,7 @@ public class Note {
         this.imagePath = imagePath;
         this.creationDate = LocalDateTime.now();
         this.lastModifiedDate = LocalDateTime.now();
+
     }
 
     public boolean hasText() {
@@ -91,6 +91,7 @@ public class Note {
 
     public void setCategories(ArrayList<String> categories) {
         this.categories = categories;
+        this.lastModifiedDate = LocalDateTime.now();
     }
 
     public void addCategory(String category) {
