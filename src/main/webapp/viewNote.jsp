@@ -57,8 +57,8 @@
       <strong>Categories:</strong>
       <% for (String categoryId : note.getCategories()) { %>
       <span class="category">
-        <a href="category.html?id=<%= categoryId %>"><%= categoryId %></a>
-      </span>
+    <a href="noteIndex.html?category=<%= categoryId %>"><%= categoryId %></a>
+  </span>
       <% } %>
     </div>
     <% } %>

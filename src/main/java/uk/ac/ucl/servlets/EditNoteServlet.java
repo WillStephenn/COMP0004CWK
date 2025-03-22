@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 import uk.ac.ucl.model.domain.Note;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -62,7 +61,15 @@ public class EditNoteServlet extends HttpServlet {
             String textContent = request.getParameter("textContent");
             String url = request.getParameter("url");
             String imagePath = request.getParameter("imagePath");
-            String[] categories = request.getParameterValues("categories");
+            String[] categoriesArray = request.getParameterValues("categories");
+
+            // Convert String[] to ArrayList<String>
+            ArrayList<String> categories = new ArrayList<>();
+            if (categoriesArray != null) {
+                for (String category : categoriesArray) {
+                    categories.add(category);
+                }
+            }
 
             Model model = ModelFactory.getModel();
             model.loadNotes();
@@ -72,7 +79,7 @@ public class EditNoteServlet extends HttpServlet {
             // Create new note or update existing
             if (id == null || id.isEmpty()) {
                 // New note
-                note = new Note(header, textContent, url, imagePath);
+                note = new Note(header, textContent, url, imagePath, categories);
             } else {
                 // Existing note
                 note = model.getNoteById(id);
@@ -89,17 +96,7 @@ public class EditNoteServlet extends HttpServlet {
                 note.setTextContent(textContent);
                 note.setUrl(url);
                 note.setImagePath(imagePath);
-            }
-
-            // Update categories
-            if (categories != null) {
-                ArrayList<String> categoryList = new ArrayList<>();
-                for (String category : categories) {
-                    categoryList.add(category);
-                }
-                note.setCategories(categoryList);
-            } else {
-                note.setCategories(new ArrayList<>());
+                note.setCategories(categories);
             }
 
             // Save note to model
@@ -109,6 +106,7 @@ public class EditNoteServlet extends HttpServlet {
                 ServletContext context = getServletContext();
                 RequestDispatcher dispatch = context.getRequestDispatcher("/error.jsp");
                 dispatch.forward(request, response);
+                // Redirect to view the saved note
                 return;
             }
 

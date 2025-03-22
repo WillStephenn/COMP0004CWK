@@ -70,6 +70,14 @@
         <div class="result-snippet"><%= snippet %></div>
         <% } %>
 
+        <% if (note.getCategories() != null && !note.getCategories().isEmpty()) { %>
+        <div class="result-categories">
+          <% for (String category : note.getCategories()) { %>
+          <a href="noteIndex.html?category=<%= category %>" class="category-tag"><%= category %></a>
+          <% } %>
+        </div>
+        <% } %>
+
         <div class="result-meta">
           Last modified: <%= note.getLastModifiedDate() %>
         </div>

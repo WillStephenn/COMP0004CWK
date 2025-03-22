@@ -11,6 +11,7 @@ import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 import uk.ac.ucl.model.domain.Note;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Comparator;
 
@@ -26,6 +27,18 @@ public class ViewNoteIndexServlet extends HttpServlet {
             Model model = ModelFactory.getModel();
             model.loadNotes();
             List<Note> notes = model.getNotes();
+
+            String filterCategory = request.getParameter("category");
+            if (filterCategory != null && !filterCategory.trim().isEmpty()) {
+                // Filter notes by category
+                List<Note> filteredNotes = new ArrayList<>();
+                for (Note note : notes) {
+                    if (note.getCategories() != null && note.getCategories().contains(filterCategory.trim())) {
+                        filteredNotes.add(note);
+                    }
+                }
+                notes = filteredNotes;
+            }
 
             // Sort Notes
             String sortBy = request.getParameter("sort");

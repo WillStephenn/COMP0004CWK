@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
+
+import com.fasterxml.jackson.databind.SerializationFeature;
 import uk.ac.ucl.model.domain.Note;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.File;
+
 
 
 public class Model
@@ -17,11 +20,11 @@ public class Model
   private final ObjectMapper mapper = new ObjectMapper();
   private final String notesFilePath = "data/notes.json";
 
-  public Map<String, Note> loadNotes() {
+  public void loadNotes() {
     try {
       File file = new File(notesFilePath);
       if (!file.exists()) {
-        return new HashMap<>();
+        return;
       }
 
       // First load as list
@@ -33,10 +36,8 @@ public class Model
         notesMap.put(note.getId(), note);
       }
 
-      return notesMap;
     } catch (IOException e) {
       e.printStackTrace();
-      return new HashMap<>();
     }
   }
 

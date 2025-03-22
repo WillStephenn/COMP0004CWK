@@ -25,7 +25,7 @@
     boolean isNew = (note == null);
 
     if (isNew) {
-      note = new Note("", "", "", "");
+      note = new Note("", "", "", "",  new ArrayList<>());
   %>
   <h2>Create New Note</h2>
   <% } else { %>
@@ -58,7 +58,12 @@
         <input type="text" id="imagePath" name="imagePath" value="<%= note.getImagePath() != null ? note.getImagePath() : "" %>">
       </div>
 
-      <!-- Categories would go here - you'd need to fetch available categories -->
+      <div class="form-group">
+        <label for="categories">Categories (comma separated):</label>
+        <input type="text" id="categories" name="categories"
+               value="<%= note.getCategories() != null ? String.join(", ", note.getCategories()) : "" %>">
+        <small>Enter categories separated by commas (e.g., work, personal, important)</small>
+      </div>
 
       <div class="buttons">
         <input type="submit" value="Save Note" class="button">

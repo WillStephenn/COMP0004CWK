@@ -35,10 +35,20 @@
     <a href="noteIndex.html?view=full">Full Content</a>
   </div>
 
+  <div class="category-filter">
+    <form action="noteIndex.html" method="get">
+      <label for="filterCategory">Filter by category:</label>
+      <input type="text" id="filterCategory" name="category" value="<%= request.getParameter("category") != null ? request.getParameter("category") : "" %>">
+      <input type="submit" value="Filter">
+      <% if(request.getParameter("category") != null && !request.getParameter("category").isEmpty()) { %>
+      <a href="noteIndex.html">Clear filter</a>
+      <% } %>
+    </form>
+  </div>
+
   <!-- Actions -->
   <div class="actions">
-    <a href="editNote.html" class="button">Create New Note</a>
-    <a href="categories.html" class="button">Manage Categories</a>
+    <a href="editNote.html" class="button">Create New Note</a
     <a href="search.html" class="button">Search Notes</a>
   </div>
 
@@ -59,6 +69,14 @@
         Created: <%= note.getCreationDate() %><br>
         Modified: <%= note.getLastModifiedDate() %>
       </div>
+      <% if (note.getCategories() != null && !note.getCategories().isEmpty()) { %>
+      <div class="note-categories">
+        <strong>Categories:</strong>
+        <% for (String category : note.getCategories()) { %>
+        <a href="noteIndex.html?category=<%= category %>" class="category-tag"><%= category %></a>
+        <% } %>
+      </div>
+      <% } %>
       <% if ("full".equals(viewType) && note.hasText()) { %>
       <div class="note-content">
         <%= note.getTextContent() %>

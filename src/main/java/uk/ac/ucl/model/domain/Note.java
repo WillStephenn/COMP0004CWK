@@ -7,22 +7,32 @@ import java.util.UUID;
 public class Note {
     private String id;
     private String header = "Untitled Note";
-    private LocalDateTime creationDate;
-    private LocalDateTime lastModifiedDate;
+    private String creationDate;
+    private String lastModifiedDate;
     private String textContent = null;
     private String url = null;
     private String imagePath = null;
     private ArrayList<String> categories = new ArrayList<>();
 
-    public Note(String header, String textContent, String url, String imagePath) {
+    public Note() {
         this.id = UUID.randomUUID().toString();
-        this.header = header;
-        this.textContent = textContent;
-        this.url = url;
-        this.imagePath = imagePath;
-        this.creationDate = LocalDateTime.now();
-        this.lastModifiedDate = LocalDateTime.now();
+        this.creationDate = LocalDateTime.now().toString();
+        this.lastModifiedDate = LocalDateTime.now().toString();
+    }
 
+    public Note(String header, String textContent, String url, String imagePath, ArrayList<String> categories) {
+        this.id = UUID.randomUUID().toString();
+        this.creationDate = LocalDateTime.now().toString();
+        this.lastModifiedDate = LocalDateTime.now().toString();
+
+        this.setHeader(header);
+        this.setTextContent(textContent);
+        this.setUrl(url);
+        this.setImagePath(imagePath);
+
+        if (categories != null) {
+            this.setCategories(categories);
+        }
     }
 
     public boolean hasText() {
@@ -47,14 +57,14 @@ public class Note {
 
     public void setHeader(String header) {
         this.header = header;
-        this.lastModifiedDate = LocalDateTime.now();
+        this.lastModifiedDate = LocalDateTime.now().toString();
     }
 
-    public LocalDateTime getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
-    public LocalDateTime getLastModifiedDate() {
+    public String getLastModifiedDate() {
         return lastModifiedDate;
     }
 
@@ -64,7 +74,7 @@ public class Note {
 
     public void setTextContent(String textContent) {
         this.textContent = textContent;
-        this.lastModifiedDate = LocalDateTime.now();
+        this.lastModifiedDate = LocalDateTime.now().toString();
     }
 
     public String getUrl() {
@@ -73,7 +83,7 @@ public class Note {
 
     public void setUrl(String url) {
         this.url = url;
-        this.lastModifiedDate = LocalDateTime.now();
+        this.lastModifiedDate = LocalDateTime.now().toString();
     }
 
     public String getImagePath() {
@@ -82,7 +92,7 @@ public class Note {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
-        this.lastModifiedDate = LocalDateTime.now();
+        this.lastModifiedDate = LocalDateTime.now().toString();
     }
 
     public ArrayList<String> getCategories() {
@@ -90,8 +100,8 @@ public class Note {
     }
 
     public void setCategories(ArrayList<String> categories) {
-        this.categories = categories;
-        this.lastModifiedDate = LocalDateTime.now();
+        this.categories.addAll(categories);
+        this.lastModifiedDate = LocalDateTime.now().toString();
     }
 
     public void addCategory(String category) {
