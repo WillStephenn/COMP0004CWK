@@ -1,6 +1,7 @@
 package uk.ac.ucl.model.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Note {
@@ -11,6 +12,8 @@ public class Note {
     private String textContent = null;
     private String url = null;
     private String imagePath = null;
+    private ArrayList<String> categories = new ArrayList<>();
+
 
     public Note(String header, String textContent, String url, String imagePath) {
         this.id = UUID.randomUUID().toString();
@@ -80,6 +83,22 @@ public class Note {
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
         this.lastModifiedDate = LocalDateTime.now();
+    }
+
+    public ArrayList<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ArrayList<String> categories) {
+        this.categories = categories;
+    }
+
+    public void addCategory(String category) {
+        this.categories.add(category);
+    }
+
+    public void removeCategory(String category) {
+        this.categories.remove(category);
     }
 
     public boolean hasContent() {
