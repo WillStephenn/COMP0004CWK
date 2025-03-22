@@ -12,8 +12,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.File;
 
-
-
 public class Model
 {
   private Map<String, Note> notesMap = new HashMap<>();

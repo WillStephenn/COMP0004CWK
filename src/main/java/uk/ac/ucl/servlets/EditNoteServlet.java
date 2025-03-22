@@ -61,13 +61,14 @@ public class EditNoteServlet extends HttpServlet {
             String textContent = request.getParameter("textContent");
             String url = request.getParameter("url");
             String imagePath = request.getParameter("imagePath");
-            String[] categoriesArray = request.getParameterValues("categories");
+            String categoriesString = request.getParameter("categories"); // Categories come in as a single string
 
-            // Convert String[] to ArrayList<String>
+            // convert categories string to an ArrayList
             ArrayList<String> categories = new ArrayList<>();
-            if (categoriesArray != null) {
-                for (String category : categoriesArray) {
-                    categories.add(category);
+            if (categoriesString != null && !categoriesString.isEmpty()) {
+                String[] categoryArray = categoriesString.split(",");
+                for (String category : categoryArray) {
+                    categories.add(category.trim()); // Add after trimming whitespace
                 }
             }
 

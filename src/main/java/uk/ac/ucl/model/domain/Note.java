@@ -100,6 +100,7 @@ public class Note {
     }
 
     public void setCategories(ArrayList<String> categories) {
+        this.categories.clear();
         this.categories.addAll(categories);
         this.lastModifiedDate = LocalDateTime.now().toString();
     }
