@@ -99,6 +99,8 @@ public class EditNoteServlet extends HttpServlet {
                 note.setUrl(url);
                 note.setImagePath(imagePath);
                 note.setCategories(categories);
+                note.updateModificationTime();
+
             }
 
             // Save note to model

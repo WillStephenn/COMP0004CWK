@@ -57,7 +57,6 @@ public class Note {
 
     public void setHeader(String header) {
         this.header = header;
-        this.lastModifiedDate = LocalDateTime.now().toString();
     }
 
     public String getCreationDate() {
@@ -74,7 +73,6 @@ public class Note {
 
     public void setTextContent(String textContent) {
         this.textContent = textContent;
-        this.lastModifiedDate = LocalDateTime.now().toString();
     }
 
     public String getUrl() {
@@ -83,7 +81,6 @@ public class Note {
 
     public void setUrl(String url) {
         this.url = url;
-        this.lastModifiedDate = LocalDateTime.now().toString();
     }
 
     public String getImagePath() {
@@ -92,7 +89,6 @@ public class Note {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
-        this.lastModifiedDate = LocalDateTime.now().toString();
     }
 
     public ArrayList<String> getCategories() {
@@ -102,19 +98,14 @@ public class Note {
     public void setCategories(ArrayList<String> categories) {
         this.categories.clear();
         this.categories.addAll(categories);
-        this.lastModifiedDate = LocalDateTime.now().toString();
     }
 
     public void addCategory(String category) {
         this.categories.add(category);
     }
 
-    public void removeCategory(String category) {
-        this.categories.remove(category);
-    }
-
-    public boolean hasContent() {
-        return hasText() || hasUrl() || hasImage();
+    public void updateModificationTime(){
+        this.lastModifiedDate = LocalDateTime.now().toString();
     }
 
     public boolean containsSearchTerm(String term) {
