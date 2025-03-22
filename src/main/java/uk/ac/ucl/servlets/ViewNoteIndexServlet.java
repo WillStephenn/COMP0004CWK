@@ -44,7 +44,7 @@ public class ViewNoteIndexServlet extends HttpServlet {
             String sortBy = request.getParameter("sort");
             if (sortBy == null || sortBy.isEmpty()) {
                 // Default sort: by creation date
-                notes.sort(Comparator.comparing(Note::getCreationDate));
+                notes.sort((a, b) -> a.getCreationDate().compareTo(b.getCreationDate()));
             } else if (sortBy.equals("title")) {
                 // Sort alphabetically by title
                 notes.sort(Comparator.comparing(Note::getHeader, String.CASE_INSENSITIVE_ORDER));
@@ -52,6 +52,14 @@ public class ViewNoteIndexServlet extends HttpServlet {
                 // Sort by last modified (newest first)
                 notes.sort(Comparator.comparing(Note::getLastModifiedDate).reversed());
             }
+
+            // Set view type
+            String viewType = request.getParameter("view");
+            if (viewType == null || viewType.isEmpty()) {
+                viewType = "summary"; // Default view
+            }
+            request.setAttribute("viewType", viewType);
+
             // Add notes to the request object so the JSP can access them
             request.setAttribute("notes", notes);
 
