@@ -1,16 +1,16 @@
 package uk.ac.ucl.model;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.fasterxml.jackson.databind.SerializationFeature;
-import uk.ac.ucl.model.domain.Note;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
-import java.io.File;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import uk.ac.ucl.model.domain.Note;
 
 public class Model
 {
@@ -25,10 +25,10 @@ public class Model
         return;
       }
 
-      // First load as list
+      // Deserialises Note List from the notes.JSON file
       List<Note> notesList = mapper.readValue(file, new TypeReference<List<Note>>(){});
 
-      // Convert to map
+      // Convert to hash map
       notesMap = new HashMap<>();
       for (Note note : notesList) {
         notesMap.put(note.getId(), note);
@@ -41,6 +41,7 @@ public class Model
 
   public boolean saveNotes() {
     try {
+      // Extracts Note List from the Hash Map and serialises it to the notes.JSON file
       List<Note> notesList = new ArrayList<>(notesMap.values());
       mapper.writeValue(new File(notesFilePath), notesList);
       return true;

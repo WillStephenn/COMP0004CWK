@@ -1,5 +1,8 @@
 package uk.ac.ucl.servlets;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -10,8 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 import uk.ac.ucl.model.domain.Note;
-import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet("/editNote.html")
 public class EditNoteServlet extends HttpServlet {
@@ -62,7 +63,7 @@ public class EditNoteServlet extends HttpServlet {
             String textContent = request.getParameter("textContent");
             String url = request.getParameter("url");
             String imagePath = request.getParameter("imagePath");
-            String categoriesString = request.getParameter("categories"); // Categories come in as a single string
+            String categoriesString = request.getParameter("categories"); // Categories come in as a single csv string
 
             // convert categories string to an ArrayList
             ArrayList<String> categories = new ArrayList<>();
