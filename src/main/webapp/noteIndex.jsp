@@ -77,10 +77,24 @@
         <% } %>
       </div>
       <% } %>
-      <% if ("full".equals(viewType) && note.hasText()) { %>
+      <% if ("full".equals(viewType)) { %>
+      <% if (note.hasText()) { %>
       <div class="note-content">
         <%= note.getTextContent() %>
       </div>
+      <% } %>
+
+      <% if (note.hasUrl()) { %>
+      <div class="note-url">
+        <strong>URL:</strong> <a href="<%= note.getUrl() %>" target="_blank"><%= note.getUrl() %></a>
+      </div>
+      <% } %>
+
+      <% if (note.hasImage()) { %>
+      <div class="note-image">
+        <img src="<%= note.getImagePath() %>" alt="Note Image" style="max-width: 300px;">
+      </div>
+      <% } %>
       <% } %>
       <div class="note-actions">
         <a href="editNote.html?id=<%= note.getId() %>">Edit</a> |
