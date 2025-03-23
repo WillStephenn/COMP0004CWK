@@ -19,7 +19,7 @@
 <body>
 <jsp:include page="/header.jsp"/>
 <div class="main">
-  <h2>My Notes</h2>
+  <h2>Index</h2>
 
   <!-- Sorting and view controls -->
   <div class="sort-controls">
@@ -48,7 +48,7 @@
 
   <!-- Actions -->
   <div class="actions">
-    <a href="editNote.html" class="button">Create New Note</a
+    <a href="editNote.html" class="button">Create New Note</a>
     <a href="search.html" class="button">Search Notes</a>
   </div>
 

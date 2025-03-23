@@ -84,24 +84,4 @@ public class Model
 
     return results;
   }
-
-  public void addNoteToCategory(String noteId, String categoryName) {
-    Note note = getNoteById(noteId);
-    if (note != null) {
-      note.addCategory(categoryName);
-      putNote(note);
-    }
-  }
-
-  public List<Note> getNotesInCategory(String categoryId) {
-    List<Note> categoryNotes = new ArrayList<>();
-
-    for (Note note : notesMap.values()) {
-      if (note.getCategories() != null && note.getCategories().contains(categoryId)) {
-        categoryNotes.add(note);
-      }
-    }
-
-    return categoryNotes;
-  }
 }
