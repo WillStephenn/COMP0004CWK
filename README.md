@@ -11,6 +11,8 @@ A web-based notes application built for the COMP0004 coursework. This project us
 The application provides a comprehensive set of features for managing personal notes. It supports full CRUD (Create, Read, Update, Delete) functionality, which is handled by a suite of dedicated servlets. Users can create and update notes through an `EditNoteServlet`, view them with `ViewNoteServlet`, and remove them using a `DeleteNoteServlet` that includes a confirmation prompt. All modifications are automatically saved to a JSON file, eliminating the need for manual saving.
 
 The system is designed to handle various content types, including text-based notes, URL references, and image paths. For organisation, notes can be assigned to multiple categories, allowing users to filter the main index by topic. Additional organisational tools include options to sort notes by their creation date, last modified date, or alphabetically by title. The application also features a search function that finds notes based on keywords in both titles and content, with results highlighting the matching text. Finally, users can switch between a summary view that shows basic information and a full view that displays the complete note content.
+![UI Screenshot](UI.png)
+
 
 ---
 
@@ -25,20 +27,6 @@ The application is built upon the **Model-View-Controller (MVC)** design pattern
 * **View**: The user interface is rendered using JavaServer Pages (JSPs). Views exist for the main note index, viewing a single note, and an editor page for creating and updating notes.
 
 * **Controller**: Java Servlets act as the controllers, processing incoming requests and interacting with the model.
-
----
-
-## Getting Started
-
-To run this project locally, you will need a Java EE application server like Apache Tomcat.
-
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/your-username/servlet-notes-app.git](https://github.com/your-username/servlet-notes-app.git)
-    ```
-2.  **Build the project** to produce a `.war` file.
-3.  **Deploy the `.war` file** to your Apache Tomcat `webapps` directory.
-4.  **Start the Tomcat server** and navigate to the application URL (e.g., `http://localhost:8080/servlet-notes-app`).
 
 ---
 
